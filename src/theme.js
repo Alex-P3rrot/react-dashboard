@@ -20,6 +20,9 @@ export const themeColors = (mode) => ({
                 background: {
                     default: "#141b2d",
                 },
+                sidebar: {
+                    backgroundColor: "#192238"
+                }
             }
             : {
                 primary: {
@@ -36,6 +39,9 @@ export const themeColors = (mode) => ({
                 background: {
                     default: "#fcfcfc",
                 },
+                sidebar: {
+                    backgroundColor: "#"
+                }
             }),
     }
 })

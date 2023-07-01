@@ -5,7 +5,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
-import {ColorModeContext, useMode} from "../../theme";
+import {ColorModeContext} from "../../theme";
 import {useContext} from "react";
 
 export function Topbar () {
