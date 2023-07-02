@@ -8,17 +8,19 @@ import StackedLineChartIcon from "@mui/icons-material/StackedLineChart";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 import GroupsIcon from "@mui/icons-material/Groups";
+import {themeColors} from "../../theme";
 
 export function SidebarApp() {
     const [selected, setSelected] = useState("Dashboard")
     const [collapsed, setCollapsed] = useState(false);
     const theme = useTheme()
+    const colors = themeColors(theme.palette.mode)
 
     return (
         <Sidebar
             collapsed={collapsed}
             breakPoint="md"
-            backgroundColor={theme.palette.sidebar.backgroundColor}
+            backgroundColor={colors.palette.sidebar.backgroundColor}
             rootStyles={{
                 position: 'relative',
                 height: '100%',
@@ -52,9 +54,9 @@ export function SidebarApp() {
                     button: ({level, active}) => {
                         if (level === 0 || level === 1) {
                             return {
-                                color: active ? 'rgba(80,232,255,0.69)' : undefined,
+                                color: active ? colors.palette.sidebar.activeColorText : undefined,
                                 "&:hover": {
-                                    color: 'rgba(80,232,255,0.69)',
+                                    color: colors.palette.sidebar.activeColorText,
                                     backgroundColor: 'transparent'
                                 },
                             }
@@ -75,9 +77,9 @@ export function SidebarApp() {
                     button: ({level, active}) => {
                         if (level === 0 || level === 1) {
                             return {
-                                color: active ? 'rgba(80,232,255,0.69)' : undefined,
+                                color: active ? colors.palette.sidebar.activeColorText : undefined,
                                 "&:hover": {
-                                    color: 'rgba(80,232,255,0.69)',
+                                    color: colors.palette.sidebar.activeColorText,
                                     backgroundColor: 'transparent'
                                 },
                                 "& svg": {

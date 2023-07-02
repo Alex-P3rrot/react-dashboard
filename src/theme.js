@@ -21,7 +21,19 @@ export const themeColors = (mode) => ({
                     default: "#141b2d",
                 },
                 sidebar: {
-                    backgroundColor: "#192238"
+                    backgroundColor: "#192238",
+                    activeColorText: "rgba(80,232,255,0.69)"
+                },
+                userTable: {
+                    backgroundColor: "#192238",
+                    accessColumn: {
+                        admin: "#06804c",
+                        manager: "#05b268",
+                        user: "#0af593",
+                        default: "#0af593"
+                    },
+                    cellFocused: "rgba(255,255,255,0.34)",
+                    checkbox: "#fcfcfc!important"
                 }
             }
             : {
@@ -40,7 +52,19 @@ export const themeColors = (mode) => ({
                     default: "#fcfcfc",
                 },
                 sidebar: {
-                    backgroundColor: "#"
+                    backgroundColor: "#e4fff7",
+                    activeColorText: "#a3beb6"
+                },
+                userTable: {
+                    backgroundColor: "#e4fff7",
+                    accessColumn: {
+                        admin: "#045431",
+                        manager: "#088651",
+                        user: "#08c475",
+                        default: "#08c475"
+                    },
+                    cellFocused: "rgba(0,0,0,0.1)",
+                    checkbox: "#141b2d"
                 }
             }),
     }
