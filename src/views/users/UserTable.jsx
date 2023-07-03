@@ -6,6 +6,7 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import PersonIcon from '@mui/icons-material/Person';
 import NoAccountsIcon from '@mui/icons-material/NoAccounts';
+import Header from "../../components/Header";
 
 export function UserTable() {
     const theme = useTheme()
@@ -64,12 +65,13 @@ export function UserTable() {
         }
     ]
     return (
-        <Box padding={10}
+        <Box padding={2}
              sx={{
                  '& .MuiDataGrid-columnHeaders': {
                      backgroundColor: colors.palette.userTable.backgroundColor
                  },
              }}>
+            <Header title="Utilisateurs" subtitle="Informations des utilisteurs"/>
             <DataGrid
                 checkboxSelection={true}
                 columns={columns}

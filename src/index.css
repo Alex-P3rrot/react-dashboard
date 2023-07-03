@@ -31,3 +31,6 @@ html, body, #root, #app, #content {
 .MuiDataGrid-cell:focus {
   outline: none!important;
 }
+.MuiDialog-paper {
+  max-width: 100vw!important;
+}

@@ -5,6 +5,7 @@ import {SidebarApp} from "./views/global/SidebarApp";
 import {Route, Routes} from "react-router-dom";
 import {UserTable} from "./views/users/UserTable";
 import {Dashboard} from "./views/Dashboard";
+import {Calendar} from "./views/Calendar";
 
 function App() {
     const [theme, colorMode] = useMode()
@@ -20,6 +21,7 @@ function App() {
                         <Routes>
                             <Route path="/" element={<Dashboard/>}/>
                             <Route path="/setting/users" element={<UserTable/>}/>
+                            <Route path="/calendar" element={<Calendar/>}/>
                         </Routes>
                     </main>
                 </div>

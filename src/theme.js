@@ -34,11 +34,18 @@ export const themeColors = (mode) => ({
                     },
                     cellFocused: "rgba(255,255,255,0.34)",
                     checkbox: "#fcfcfc!important"
-                }
+                },
+                calendar: {
+                    dateSelected: {
+                        backgroundColor: "#fcfcfc!important",
+                        color: "#141b2d"
+                    },
+                    dateHovered: "rgba(252,252,252,0.1)"
+                },
             }
             : {
                 primary: {
-                    main: "#040509",
+                    main: "#273056",
                 },
                 secondary: {
                     main: "#4cceac",
@@ -65,8 +72,44 @@ export const themeColors = (mode) => ({
                     },
                     cellFocused: "rgba(0,0,0,0.1)",
                     checkbox: "#141b2d"
+                },
+                calendar: {
+                    dateSelected: {
+                        backgroundColor: "#141b2d!important",
+                        color: "#fcfcfc"
+                    },
+                    dateHovered: "rgba(20,27,45,0.1)"
                 }
             }),
+    },
+    components: {
+        ...(mode === 'dark'
+            ? {
+                MuiButton: {
+                    styleOverrides: {
+                        root: {
+                            '&:hover': {
+                                boxShadow: '0 0 10px #fcfcfc',
+                                backgroundColor: "#fcfcfc"
+                            },
+                            backgroundColor: "#fcfcfc"
+                        }
+                    }
+                }
+            }
+            : {
+                MuiButton: {
+                    styleOverrides: {
+                        root: {
+                            '&:hover': {
+                                boxShadow: '0 0 10px #141b2d',
+                                backgroundColor: "#141b2d"
+                            },
+                            backgroundColor: "#141b2d"
+                        }
+                    }
+                }
+            })
     }
 })
 

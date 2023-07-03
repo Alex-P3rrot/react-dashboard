@@ -64,6 +64,7 @@ export function SidebarApp() {
                     },
                 }}>
                     <ItemMenu selected={selected} setSelected={setSelected} to="/" title="Dashboard"/>
+                    <ItemMenu selected={selected} setSelected={setSelected} to="/calendar" title="Calendrier"/>
                 </Menu>
                 <Box paddingTop={2} textAlign="center">
                     <Typography
