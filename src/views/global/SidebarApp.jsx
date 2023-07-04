@@ -1,5 +1,5 @@
 import {Sidebar, Menu, MenuItem, SubMenu, menuClasses} from 'react-pro-sidebar';
-import {Avatar, Box, IconButton, Typography, useTheme} from "@mui/material";
+import {Avatar, Box, IconButton, Tooltip, Typography, useTheme} from "@mui/material";
 import {useState} from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 import {Link} from "react-router-dom";
@@ -8,6 +8,9 @@ import StackedLineChartIcon from "@mui/icons-material/StackedLineChart";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 import GroupsIcon from "@mui/icons-material/Groups";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import {themeColors} from "../../theme";
 
 export function SidebarApp() {
@@ -15,6 +18,23 @@ export function SidebarApp() {
     const [collapsed, setCollapsed] = useState(false);
     const theme = useTheme()
     const colors = themeColors(theme.palette.mode)
+    const ItemMenu = ({selected, setSelected, icon, to, title, submenu = false}) => {
+        return (
+            <MenuItem
+                component={<Link to={to}/>}
+                active={selected === title}
+                onClick={() => setSelected(title)}
+                sx={{textAlign: 'center'}}>
+                <Tooltip placement="top-start" title={title}>
+
+                    {collapsed && !submenu
+                        ? <Typography sx={{textAlign: 'center'}}>{icon}</Typography>
+                        : <Typography sx={{display: 'flex', gap: 2}}>{icon} {title}</Typography>
+                    }
+                </Tooltip>
+            </MenuItem>
+        )
+    }
 
     return (
         <Sidebar
@@ -49,7 +69,7 @@ export function SidebarApp() {
                     </Box>
                 </Box>
             }
-            <Box>
+            <Box paddingTop={collapsed ? 5 : 0}>
                 <Menu menuItemStyles={{
                     button: ({level, active}) => {
                         if (level === 0 || level === 1) {
@@ -63,8 +83,10 @@ export function SidebarApp() {
                         }
                     },
                 }}>
-                    <ItemMenu selected={selected} setSelected={setSelected} to="/" title="Dashboard"/>
-                    <ItemMenu selected={selected} setSelected={setSelected} to="/calendar" title="Calendrier"/>
+                    <ItemMenu selected={selected} setSelected={setSelected} icon={<DashboardIcon/>} to="/"
+                              title="Dashboard"/>
+                    <ItemMenu selected={selected} setSelected={setSelected} icon={<CalendarMonthIcon/>} to="/calendar"
+                              title="Calendrier"/>
                 </Menu>
                 <Box paddingTop={2} textAlign="center">
                     <Typography
@@ -100,28 +122,23 @@ export function SidebarApp() {
                     <SubMenu
                         rootStyles={{
                             ['.' + menuClasses.subMenuContent]: {
-                                backgroundColor: 'transparent',
+                                backgroundColor: colors.palette.sidebar.backgroundColor,
                             },
+                            textAlign: collapsed ? 'center' : 'start'
                         }}
-                        label="Paramètres">
+                        label={
+                            collapsed
+                                ? <Tooltip placement="top-start" title="Paramètres"><SettingsApplicationsIcon/></Tooltip>
+                                : <Tooltip placement="top-start"
+                                           title="Paramètres"><Typography>Paramètres</Typography></Tooltip>
+                        }>
                         <ItemMenu selected={selected} setSelected={setSelected} icon={<SettingsSuggestIcon/>}
-                                  to="/setting/general" title="Général"/>
+                                  to="/setting/general" title="Général" submenu={true}/>
                         <ItemMenu selected={selected} setSelected={setSelected} icon={<GroupsIcon/>} to="/setting/users"
-                                  title="Utilisateurs"/>
+                                  title="Utilisateurs" submenu={true}/>
                     </SubMenu>
                 </Menu>
             </Box>
         </Sidebar>
-    )
-}
-
-const ItemMenu = ({selected, setSelected, icon, to, title}) => {
-    return (
-        <MenuItem
-            component={<Link to={to}/>}
-            active={selected === title}
-            onClick={() => setSelected(title)}>
-            <Typography sx={{display: 'flex', gap: 2}}>{icon} {title}</Typography>
-        </MenuItem>
     )
 }
