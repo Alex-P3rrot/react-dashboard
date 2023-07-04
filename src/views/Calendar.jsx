@@ -14,9 +14,10 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid'
 import multiMonthPlugin from '@fullcalendar/multimonth'
-import {useState} from "react";
+import React, {useState} from "react";
 import {themeColors} from "../theme";
 import {StyledTextarea} from "../components/StyledTextarea";
+import {CalendarEventList} from "../components/CalendarEventList";
 
 const ACTIONS = {
     create: 'create',
@@ -24,10 +25,10 @@ const ACTIONS = {
 }
 
 export function Calendar() {
-    const initialStateEventFormData = {id: 0, title: '', description: '', start: ''}
+    const initialStateEventFormData = {id: 0, title: '', description: '', start: null}
     const theme = useTheme()
     const colors = themeColors(theme.palette.mode)
-    const [events, setEvents] = useState([])
+    const [events, setEvents] = useState([{id: 0, title: 'Test', start: new Date()}])
     const [eventFormData, setEventFormData] = useState(initialStateEventFormData)
     const [open, setOpen] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null)
@@ -58,8 +59,8 @@ export function Calendar() {
         setOpen(true)
     }
     const handleDelete = () => {
-        // const toEdit = events.find(el => el.id === parseInt(e.event.id))
-        // setEditing(toEdit)
+        setEvents(prevState => prevState.filter(el => el.id !== selectedEventId))
+        setAnchorEl(null)
     }
     const handleClosePopover = () => {
         setAnchorEl(null)
@@ -67,6 +68,14 @@ export function Calendar() {
     const handleCloseDialog = () => {
         setOpen(false)
         setEventFormData(initialStateEventFormData)
+    }
+    const handleChangeDate = (event) => {
+        setEvents(prevState => prevState.map(el => {
+            if (el.id == event.oldEvent.id) {
+                el.start = event.event.start
+            }
+            return el
+        }))
     }
 
     return (
@@ -88,29 +97,49 @@ export function Calendar() {
                     <Button onClick={handleEdit} sx={{width: 120, backgroundColor: "#f8d79b"}}>Editer</Button>
                 </Box>
             </Popover>
-            <Header title="Calendrier" subtitle="Calendrier interactif"/>
-            <FullCalendar
-                height="75vh"
-                plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, multiMonthPlugin]}
-                selectable={true}
-                editable={true}
-                select={handleSelectDate}
-                events={events || []}
-                eventClick={infos => {
-                    setIsEditing(true)
-                    setSelectedEventId(Number(infos.event.id))
-                    setAnchorEl(infos.el)
-                }}
-                headerToolbar={{
-                    left: 'dayGridMonth dayGridWeek dayGridDay',
-                    center: 'title',
-                    right: 'prev,next today'
-                }}>
-            </FullCalendar>
+            <Header title="Calendrier"/>
+            <Box display="grid" gridTemplateColumns="15% 80%" gap="2%" paddingLeft={3}>
+                <CalendarEventList events={events} themeColors={colors}/>
+                <FullCalendar
+                    height="75vh"
+                    plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, multiMonthPlugin]}
+                    selectable={true}
+                    editable={true}
+                    select={handleSelectDate}
+                    events={events || []}
+                    eventClick={infos => {
+                        setIsEditing(true)
+                        setSelectedEventId(Number(infos.event.id))
+                        setAnchorEl(infos.el)
+                    }}
+                    eventChange={event => handleChangeDate(event)}
+                    headerToolbar={{
+                        left: 'dayGridMonth dayGridWeek dayGridDay',
+                        center: 'title',
+                        right: 'prev,next today'
+                    }}>
+                </FullCalendar>
+            </Box>
             <Dialog open={open} onClose={handleCloseDialog}>
                 <Box width="50vw" height="75hv" padding={5} backgroundColor={colors.palette.background.default}>
-                    <Typography variant="h6" textAlign="center">Create new event</Typography>
+                    <Typography variant="h6" textAlign="center">{isEditing ? 'Edit' : 'Create new event'}</Typography>
                     <Stack spacing={2}>
+                        <FormControl>
+                            <Button sx={{
+                                width: 'fit-content',
+                                background: 'transparent',
+                                color: '#fff',
+                                '&:hover': {background: 'transparent'}
+                            }}>
+                                {
+                                    isEditing && selectedEvent.start != null
+                                        ? selectedEvent.start.toLocaleDateString(['fr-FR'], {dateStyle: 'full'})
+                                        : !isEditing && eventFormData.start != null
+                                            ? eventFormData.start.toLocaleDateString(['fr-FR'], {dateStyle: 'full'})
+                                            : null
+                                }
+                            </Button>
+                        </FormControl>
                         <FormControl>
                             <TextField autoFocus
                                        required
