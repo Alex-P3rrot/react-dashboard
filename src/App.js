@@ -6,6 +6,10 @@ import {Route, Routes} from "react-router-dom";
 import {UserTable} from "./views/users/UserTable";
 import {Dashboard} from "./views/Dashboard";
 import {Calendar} from "./views/Calendar";
+import {Pie} from "./views/charts/Pie";
+import {Line} from "./views/charts/Line";
+import {Bar} from "./views/charts/Bar";
+import {Geo} from "./views/charts/Geo";
 
 function App() {
     const [theme, colorMode] = useMode()
@@ -22,6 +26,10 @@ function App() {
                             <Route path="/" element={<Dashboard/>}/>
                             <Route path="/setting/users" element={<UserTable/>}/>
                             <Route path="/calendar" element={<Calendar/>}/>
+                            <Route path="/chart/pie" element={<Pie/>}/>
+                            <Route path="/chart/line" element={<Line/>}/>
+                            <Route path="/chart/Bar" element={<Bar/>}/>
+                            <Route path="/chart/Geo" element={<Geo/>}/>
                         </Routes>
                     </main>
                 </div>

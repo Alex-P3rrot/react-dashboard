@@ -8,6 +8,7 @@ html, body, #root, #app, #content {
   font-family: 'Source Sans 3', sans-serif;
   height: 100%;
   width: 100%;
+  font-size: .9rem;
 }
 
 #app {
@@ -33,4 +34,11 @@ html, body, #root, #app, #content {
 }
 .MuiDialog-paper {
   max-width: 100vw!important;
+}
+
+.menuItem {
+  color: rgba(255, 255, 255, 0.85);
+}
+.menuItemLight {
+  color: rgba(0, 0, 0, 0.85);
 }

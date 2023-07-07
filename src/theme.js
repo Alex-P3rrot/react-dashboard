@@ -10,7 +10,7 @@ export const themeColors = (mode) => ({
                     main: "#141b2d",
                 },
                 secondary: {
-                    main: "#4cceac",
+                    main: "#3a9b83",
                 },
                 neutral: {
                     dark: "#a3a3a3",
@@ -48,7 +48,7 @@ export const themeColors = (mode) => ({
                     main: "#273056",
                 },
                 secondary: {
-                    main: "#4cceac",
+                    main: "#3a9b83",
                 },
                 neutral: {
                     dark: "#a3a3a3",
@@ -59,11 +59,11 @@ export const themeColors = (mode) => ({
                     default: "#fcfcfc",
                 },
                 sidebar: {
-                    backgroundColor: "#e4fff7",
+                    backgroundColor: "rgba(3,25,82,0.04)",
                     activeColorText: "#a3beb6"
                 },
                 userTable: {
-                    backgroundColor: "#e4fff7",
+                    backgroundColor: "rgba(3,25,82,0.04)",
                     accessColumn: {
                         admin: "#045431",
                         manager: "#088651",
